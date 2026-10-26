@@ -1,6 +1,6 @@
 # 02 · Booking.com "Anywhere": design, prototype & functional requirements
 
-**Product Management Academy · Homework 2 · Design: Strategy, AI Prototyping & Bulletproof Specs**
+**STRV Product Academy · Homework 2 · Design: Strategy, AI Prototyping & Bulletproof Specs**
 
 Builds on [01 · Feature proposal](../01-feature-proposal-booking-anywhere/): a travel search that starts with *when* and *who* and helps people discover *where*.
 

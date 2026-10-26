@@ -1,5 +1,6 @@
 # Product Management Portfolio
 
+Hi, I'm Yuliya, a Product Manager in training at the STRV Product Academy.
 This repo collects my product work: problem framing, MVP scoping, metrics, prototyping and specs.
 
 > All cases are learning exercises. Company names are used as example products; data, interviews and system details are assumptions made for the exercise.

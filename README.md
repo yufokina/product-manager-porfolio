@@ -10,7 +10,7 @@ This repo collects my product work: problem framing, MVP scoping, metrics, proto
 | # | Case | What I did | Skills shown |
 |---|------|-----------|--------------|
 | 01 | [**Booking.com "Anywhere": feature proposal**](01-feature-proposal-booking-anywhere/) | Found an underserved segment (travellers who know *when* but not *where*), defined personas, MVP scope with explicit cuts, a North Star metric with a funnel, and re-scoped under a 50% budget cut | Discovery, prioritization, metrics, trade-offs |
-| 02 | [**Booking.com "Anywhere": design, prototype & FRD**](02-design-prototype-booking-anywhere/) | Moodboard and brief, AI-built clickable prototype of 3 flows, and a 14-page functional requirements doc engineering can build from without a walkthrough | Design thinking, AI prototyping, spec writing |
+| 02 | [**Booking.com "Anywhere": design, prototype & FRD**](02-design-prototype-booking-anywhere/) | Moodboards and brief, AI-built clickable prototype of 3 flows, and a 16-page functional requirements doc engineering can build from without a walkthrough | Design thinking, AI prototyping, spec writing |
 
 ## How I work with AI
 

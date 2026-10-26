@@ -5,10 +5,11 @@
 | Field | Value |
 |---|---|
 | Document | FRD-ANYWHERE-001 |
-| Version | 1.0 (draft for engineering review) |
+| Version | 1.1 (draft for engineering review) |
+| Changes in 1.1 | Destination overview uses a summary built only from existing data instead of written descriptions (BR-07, BR-08, section 8.4); Screen 3 uses the standard filter panel unchanged (FR-307); neighbourhood filter and "Popular nearby" removed; "Mild weather" tag removed. |
 | Date | 26 October 2026 |
 | Status | Draft. Open questions in section 13 must be resolved before sprint planning. |
-| Related documents | ["Anywhere" feature proposal](../../01-feature-proposal-booking-anywhere/proposal.md) (problem, personas, metrics) · Screens 1–3 (concept) · [Clickable prototype](../2-prototype/) · [Moodboard](../1-moodboard/brief.md) |
+| Related documents | ["Anywhere" feature proposal](../../01-feature-proposal-booking-anywhere/feature_proposal.pdf) (problem, personas, metrics) · Screens 1–3 (concept) · [Clickable prototype](../2-prototype/) · [Moodboard](../1-moodboard/brief.md) |
 | Reviewers | Engineering lead (search), Engineering lead (front end), Design, Data/Analytics, QA, Legal (pricing display) |
 
 > **Context:** this is a Product Management Academy exercise. Booking.com is used as the example product; system names, services and numbers are assumptions made for the exercise, not Booking.com internals.
@@ -60,7 +61,7 @@ It is written so that engineering, design and QA can estimate, build and test th
 | ID | Assumption or dependency | Impact if false |
 |---|---|---|
 | AS-01 | The availability and pricing service can return the cheapest qualifying offer per property for a list of destinations in one batch call. | A new aggregation job is needed; estimate grows. |
-| AS-02 | Destination content (hero image, short description, theme tags, neighbourhoods) exists in the content system for every candidate destination, or the content team can create it before launch. | Launch with fewer candidate destinations or a fallback layout (FR-306). |
+| AS-02 | The data needed for destination summaries already exists and can be queried per destination: property locations and districts, property facilities, booking counts, review scores, review text, landmarks near properties, and property photos (BR-07). | Drop the affected summary line or tag; the overview still works (FR-306). |
 | AS-03 | The existing property search results page accepts a destination ID, occupancy, dates, filters and a source parameter, and can render an extra header block. | Screen 3 becomes a new page; estimate grows. |
 | AS-04 | The experimentation platform supports user-level assignment for logged-in and logged-out users. | Experiment design must change. |
 | AS-05 | The booking record can store an entry source (`entry_source`). | Attribution relies on analytics only. |
@@ -68,7 +69,7 @@ It is written so that engineering, design and QA can estimate, build and test th
 
 ## 4. Users and user stories
 
-Personas are described in the [feature proposal](../../01-feature-proposal-booking-anywhere/proposal.md#5-user-personas). Stories below are the ones the MVP must satisfy.
+Personas are described in the [feature proposal](../../01-feature-proposal-booking-anywhere/feature_proposal.pdf#5-user-personas). Stories below are the ones the MVP must satisfy.
 
 | ID | User story | Persona |
 |---|---|---|
@@ -115,7 +116,7 @@ Personas are described in the [feature proposal](../../01-feature-proposal-booki
 |---|---|---|
 | FR-201 | The page shall show only eligible destinations (BR-03) for the exact dates and occupancy. | Must |
 | FR-202 | The page header shall read "{n} destinations found" with the subtitle "Explore destinations with availability for your dates and guests." | Must |
-| FR-203 | Each destination card shall show: hero image, destination name and country, description (max 160 characters, truncated with an ellipsis), up to 4 theme tags, the link "{n} stays available", up to 4 thumbnail images, average price per night, total price for the stay with "for {nights} nights", and the button "Explore stays". | Must |
+| FR-203 | Each destination card shall show: hero image, destination name and country, a one-line data summary (BR-07: "Guests often mention {k1}, {k2} and {k3}." and "Rated {score} by guests · Most booked: {area1}, {area2}"), up to 4 theme tags (BR-08), the link "{n} stays available", up to 4 thumbnail images, average price per night, total price for the stay with "for {nights} nights", and the button "Explore stays". | Must |
 | FR-204 | Prices shall be calculated as in BR-04 and shown in the user's selected currency, following existing market rules for taxes and fees. | Must |
 | FR-205 | The count "{n} stays available" shall equal the number of available stays in that destination after the active filters are applied. | Must |
 | FR-206 | Clicking the card image, title, "{n} stays available" or "Explore stays" shall open Screen 3 for that destination, carrying dates, occupancy, active filters and `src=anywhere`. | Must |
@@ -165,9 +166,9 @@ Screen 3 is the existing property search results page for one destination, with 
 | FR-302 | [1] Selecting a different specific destination in the search bar shall open the standard search results for that destination without the tag and without `src=anywhere`. Selecting "Anywhere" shall return to Screen 2 with the current inputs. | Must |
 | FR-303 | [2] A breadcrumb shall read "Home › Explore anywhere › Results › {Destination}". "Home" opens the homepage, "Explore anywhere" and "Results" open Screen 2 with current inputs and filters. The last item is not a link. | Must |
 | FR-304 | [4] "Back to all destinations" shall return to Screen 2 restoring filters, sort and scroll position (browser history state). | Must |
-| FR-305 | [3] The destination overview shall show: hero image, destination name and country, a description of 2–3 sentences (max 400 characters) including the main neighbourhoods, and up to 4 theme tags. | Must |
-| FR-306 | [3] If description or hero image is missing for a destination, the overview shall show the name, country and tags only, without an empty image area. | Must |
-| FR-307 | [5] Budget, property type and facility filters chosen on Screen 2 shall be pre-applied. A "Neighbourhood" filter shall list the destination's districts with counts. The mini-map shall open the existing map view. | Must |
+| FR-305 | [3] The destination overview shall show: hero image, destination name and country, a data summary of up to 3 labelled lines (Guests often mention · Most booked areas · Guest rating) generated from templates (BR-07), the source line "Summary based on Booking.com bookings, property data and guest reviews", and up to 4 theme tags (BR-08). No free-text editorial description is shown. | Must |
+| FR-306 | [3] A summary line or tag whose data does not meet the thresholds in BR-07 or BR-08 shall be hidden, not shown empty. If no summary line qualifies, the overview shall show the name, country, hero image and tags only. | Must |
+| FR-307 | [5] The filter panel shall be the standard search results filter panel, unchanged: same filters, order, counts and behaviour as a normal destination search (e.g. budget, popular filters, property type, review score, distance from centre, meals, facilities). Filters chosen on Screen 2 shall be pre-applied by mapping them to the same existing filter IDs. The mini-map shall open the existing map view. No Anywhere-specific filters are added or removed on Screen 3. | Must |
 | FR-308 | [6] The heading shall read "{Destination}: {shown} of {total} stays shown", where total is the number of available stays before Screen 3 filters. | Must |
 | FR-309 | [6] Property cards shall reuse the existing property card component and show: photo, name, area and distance, review score and count, the cheapest qualifying room for the full occupancy, cancellation policy, total price for the stay with "{nights} nights, {occupancy}", price per night, and "See availability". | Must |
 | FR-310 | [6] Only properties with a qualifying offer (BR-02) shall be listed. | Must |
@@ -180,9 +181,10 @@ Screen 3 is the existing property search results page for one destination, with 
 | AC-301 | Given Screen 3 for Valencia from Anywhere, when the page loads, then the search bar shows "Valencia, Spain" with "via Anywhere", the breadcrumb ends with "Valencia, Spain", and the overview is shown. | FR-301, FR-303, FR-305 |
 | AC-302 | Given Screen 3, when the user changes guests from 2 to 4 adults, then the page reloads for Valencia, the tag stays, and every listed property fits 4 adults in the selected rooms. | FR-301, FR-310 |
 | AC-303 | Given Screen 3, when the user types and selects "Lisbon" in the destination field, then the standard Lisbon results open without the tag and without `src=anywhere`. | FR-302 |
-| AC-304 | Given a destination without a description, when Screen 3 loads, then the overview shows name, country and tags and no empty image placeholder. | FR-306 |
+| AC-304 | Given a destination with fewer than 50 reviews in the last 12 months, when Screen 3 loads, then the "Guests often mention" and "Guest rating" lines are hidden and the other lines are shown. | FR-306, BR-07 |
 | AC-305 | Given the user books a property after clicking "See availability" on Screen 3, then the booking record has `entry_source=anywhere` and the `booking_completed` event carries `src=anywhere`. | FR-311, AN-08 |
 | AC-306 | Given filters leave no properties, then the empty state is shown with a one-tap removal of the last filter. | FR-312 |
+| AC-307 | Given budget max €150 and "Apartments" selected on Screen 2, when the user opens Screen 3, then the standard filter panel is shown with budget ≤ €150 and "Apartments" pre-selected, and all other standard filters (e.g. review score, distance from centre) are available. | FR-307 |
 
 ## 8. Business rules, data and interfaces
 
@@ -190,14 +192,15 @@ Screen 3 is the existing property search results page for one destination, with 
 
 | ID | Rule |
 |---|---|
-| BR-01 | **Candidate destinations.** A curated list of cities and regions maintained by the content team (initially about 350, matching the "345 destinations found" example). Each has a destination ID, name, country, coordinates, content (BR-07) and a popularity score. The list is configurable without a release. |
+| BR-01 | **Candidate destinations.** A curated list of cities and regions maintained by the product team (initially about 350, matching the "345 destinations found" example). Each has a destination ID, name, country, coordinates and a popularity score; summaries and tags are computed from existing data (BR-07, BR-08). The list is configurable without a release. |
 | BR-02 | **Qualifying offer.** A room offer is qualifying if it is bookable now for the exact check-in and check-out dates and the selected rooms can accommodate all adults and children (using existing occupancy and child-age rules). |
 | BR-03 | **Eligible destination.** A candidate destination with at least `min_stays` available stays after filters. Default `min_stays = 3` (configurable) so that users don't open destinations with almost no choice. |
 | BR-04 | **Destination price.** For each available stay, take the cheapest qualifying offer's total stay price for the full occupancy, including taxes and fees as required by the market. Total = arithmetic mean of these values across the destination's available stays after filters. Average per night = Total ÷ number of nights. Both are rounded to the nearest whole currency unit for display. |
 | BR-05 | **Best match ranking.** `score = 0.4 × availability + 0.3 × affordability + 0.3 × popularity`, where availability = available stays ÷ max available stays among eligible destinations; affordability = 1 − (avg price per night ÷ max avg price per night); popularity = destination popularity score (0–1) for the travel month. Weights are configurable. Ties: higher availability first. No user-level personalisation. |
 | BR-06 | **Budget filter.** A stay passes if its cheapest qualifying offer, per night, is between the selected minimum and maximum. "€1,200+" means no upper limit. |
-| BR-07 | **Destination content.** Hero image (min 1200×800 px), up to 4 thumbnails, description (max 160 characters for Screen 2, max 400 for Screen 3), up to 4 theme tags from a fixed list (Beaches, Culture, Great food, Nature, Relaxation, Nightlife, Outdoors, History, Mild weather), neighbourhood list. All text is localised. |
-| BR-08 | **Attribution.** `src=anywhere` is added on Screen 2 → 3 navigation and kept until booking or until the user starts a non-Anywhere search. The booking stores `entry_source=anywhere`. |
+| BR-07 | **Destination summary (from existing data only).** Generated per destination and language from templates; no editorial or AI-written text. Lines: (1) **Guests often mention**: top 3 topics found in review text for properties in the destination, last 12 months, min. 50 reviews; (2) **Most booked areas**: top 3 districts by bookings, last 12 months; (3) **Guest rating**: average review score and review count, min. 50 reviews. Screen 2 uses lines 1, 3 and the top 2 areas. **Hero image and thumbnails**: main photos of the most booked properties, preferring photos tagged as exterior or view. Only placeholders are filled; the template text is translated once in the translation system. |
+| BR-08 | **Theme tags (rule-based).** A tag is shown if its rule is met; max 4 tags, ordered by strength. Beaches: ≥ 20% of available stays are beachfront or within 1 km of a beach landmark. Great food: food or restaurants mentioned in ≥ 15% of reviews. Nightlife: nightlife or bars mentioned in ≥ 10% of reviews. Culture: ≥ 5 museum or theatre landmarks nearby. History: ≥ 5 historic landmarks (castle, old town, cathedral). Nature: ≥ 20% of stays with mountain, lake or garden view, or ≥ 3 nature landmarks. Outdoors: hiking, cycling or water-sports mentioned in ≥ 10% of reviews. Relaxation: ≥ 20% of stays with spa or wellness. Scenic views: ≥ 30% of stays with a view facility. Family-friendly: ≥ 25% of stays with family rooms. All thresholds configurable. Weather-based tags are out of scope (no internal data). Tags are for display only; Booking.com has no theme filters today. |
+| BR-09 | **Attribution.** `src=anywhere` is added on Screen 2 → 3 navigation and kept until booking or until the user starts a non-Anywhere search. The booking stores `entry_source=anywhere`. |
 
 ### 8.1 URL schema
 
@@ -221,8 +224,8 @@ Screen 3: /searchresults?dest_id={id}&checkin=...&checkout=...&adults=...&rooms=
     {
       "dest_id": "valencia-es",
       "name": "Valencia", "country": "Spain",
-      "description_short": "Sunny beaches, historic old town ...",
-      "tags": ["beaches", "culture", "great_food", "mild_weather"],
+      "summary": {"mentions": ["beach","food","architecture"], "top_areas": ["Ciutat Vella","Ruzafa"], "rating": 8.6, "review_count": 41200},
+      "tags": ["beaches", "culture", "great_food", "family_friendly"],
       "hero_image_url": "...", "thumbnail_urls": ["...", "...", "...", "..."],
       "available_stays": 128,
       "avg_price_per_night": 92, "avg_total_price": 644,
@@ -235,12 +238,20 @@ Screen 3: /searchresults?dest_id={id}&checkin=...&checkout=...&adults=...&rooms=
 }
 ```
 
-Screen 3 uses the existing property search API with `dest_id` and `src`. The destination overview block uses a new content call `GET /api/destinations/{dest_id}/overview?locale=` returning name, country, description_long, tags, hero_image_url and neighbourhoods.
+Screen 3 uses the existing property search API with `dest_id` and `src`. The destination overview block uses a new content call `GET /api/destinations/{dest_id}/overview?locale=` returning name, country, the summary lines (mentions, top_areas, rating, review_count), tags and hero_image_url. Summaries and tags are recomputed nightly by a batch job per destination and language (section 8.4).
 
 ### 8.3 Computation and caching
 - Results are computed by fanning out availability requests for the candidate set (BR-01) and aggregating per destination (BR-04).
 - Aggregates shall be cached per key (check-in, check-out, occupancy, currency) for 15 minutes. Filters are applied on the cached per-property data, not by new availability calls.
 - Prices on Screen 2 and Screen 3 are indicative. The property page always shows the live price; this matches existing behaviour.
+
+### 8.4 Destination summary pipeline
+- A nightly batch job computes, per candidate destination: review topics, top areas, rating, theme tags (using facilities, landmarks and reviews) and selected photos (BR-07, BR-08). Output is stored and served by the overview API.
+- Review topics use the existing review-topic classification if available; otherwise a fixed keyword list per language (beach, food, nightlife, views, architecture, old town, lake, hiking …).
+- Destinations that meet no summary threshold still appear in results if eligible (BR-03); only the summary is reduced (FR-306).
+- No editorial or AI-generated free text is shown in the MVP, so there is no content-writing cost and no risk of invented claims. Any wording is fixed template text, translated once.
+
+*Example (Valencia): Guests often mention beach, food and architecture · Most booked areas: Ciutat Vella, Ruzafa, Malvarrosa beach · Guest rating 8.6 average from 41,200 reviews. Tags: Beaches, Culture, Great food, Family-friendly.*
 
 ## 9. UI and design rules
 
@@ -252,7 +263,7 @@ The MVP evolves the existing design system; it is not a redesign. A redesign wou
 | Reuse as-is | Header, search box, date picker, occupancy picker, filter panel, checkboxes, range slider, sort dropdown, map view, property card, buttons, breadcrumb, review score badge. |
 | New components | Destination card (Screen 2), destination overview block (Screen 3), "via Anywhere" tag, "Anywhere" suggestion row. Built only from existing design tokens (colour, type, spacing, radius, elevation). |
 | Copy | Sentence case, short, existing tone of voice. All strings in the translation system; no hard-coded text. |
-| Imagery | Destination photos from the content library: bright, real places, no text on images, 3:2 ratio for heroes. |
+| Imagery | Photos of real properties and their views selected by BR-07; no text on images; 3:2 ratio for heroes. |
 | Reference | See the [moodboard](../1-moodboard/brief.md). |
 
 ### 9.2 Responsive behaviour
@@ -269,7 +280,7 @@ The MVP evolves the existing design system; it is not a redesign. A redesign wou
 | NFR-03 | **Resilience.** A kill switch (feature flag) hides the Anywhere option within 5 minutes without a deploy. Failure of the Anywhere service never affects standard search. |
 | NFR-04 | **Scalability.** Support peak traffic of the treatment group at 50% allocation without raising availability-service error rate above its current SLO. |
 | NFR-05 | **Accessibility.** WCAG 2.2 AA: suggestion list and slider are keyboard and screen-reader operable; images have alt text (destination name); colour contrast ≥ 4.5:1 for text; focus is visible; result count changes are announced. |
-| NFR-06 | **Localisation.** All supported languages and currencies at launch in the experiment markets; destination names and descriptions localised; dates and numbers in locale format. |
+| NFR-06 | **Localisation.** All supported languages and currencies at launch in the experiment markets; summary templates translated once; destination, district and landmark names as in existing localised data; dates and numbers in locale format. |
 | NFR-07 | **Privacy.** No new personal data is collected. Analytics events follow existing consent rules (GDPR); no event is sent before consent where consent is required. |
 | NFR-08 | **SEO.** `/anywhere` result pages are noindex (parameterised, user-specific). |
 | NFR-09 | **Browser support.** Same as the current website. |
@@ -314,7 +325,7 @@ These events feed the metrics in the proposal: incremental bookings (AN-08 by va
 | OQ-01 | Should "Anywhere" be pre-selected in the destination field for treatment users (as in the concept screen), or only offered as the first suggestion? Pre-selection may raise adoption but risks the standard-search guardrail. Proposal: test as a second treatment variant later. | Product | Sprint planning |
 | OQ-02 | Mean vs median for destination price (BR-04). The median is less sensitive to luxury outliers but the label must then change from "avg.". | Product + Data | Design freeze |
 | OQ-03 | How does Anywhere relate to the existing AI Trip Planner in the app (destination inspiration via chat)? Shared destination content? Cross-links? | Product leads | Before phase 2 |
-| OQ-04 | Final list and number of candidate destinations per market (BR-01) and content readiness (AS-02). | Content | Sprint 1 |
+| OQ-04 | Final list of candidate destinations per market (BR-01). Do review-topic classifications already exist per language, or is a keyword list needed (section 8.4)? Are the tag thresholds in BR-08 realistic? To be checked on real data. | Data + Product | Sprint 1 |
 | OQ-05 | Can the availability service handle the fan-out for ~350 destinations at 50% allocation, or do we need nightly pre-computation for popular date ranges? | Search engineering | Sprint planning |
 | OQ-06 | Which markets run the experiment first? | Product + Data | Sprint planning |
 
@@ -325,8 +336,8 @@ These events feed the metrics in the proposal: incremental bookings (AN-08 by va
 | US-01 | FR-101–106 | AC-101–103 | Adoption rate |
 | US-02 | FR-203, FR-204, FR-309, BR-04 | AC-201 | Discovery engagement |
 | US-03 | FR-201, FR-310, BR-02 | AC-202, AC-302 | Conversion (family segment) |
-| US-04 | FR-210–215, FR-307, BR-06 | AC-203, AC-204 | Discovery engagement |
-| US-05 | FR-305, FR-306 | AC-301, AC-304 | Explore stays → property open rate |
+| US-04 | FR-210–215, FR-307, BR-06 | AC-203, AC-204, AC-307 | Discovery engagement |
+| US-05 | FR-305, FR-306, BR-07, BR-08 | AC-301, AC-304 | Explore stays → property open rate |
 | US-06 | FR-207, FR-303, FR-304 | AC-206 | Destinations explored per session |
 | US-07 | FR-311 | AC-305 | Search-to-booking conversion |
-| US-08 | FR-311, BR-08, AN-01–10 | AC-305 | Incremental bookings (North Star) |
+| US-08 | FR-311, BR-09, AN-01–10 | AC-305 | Incremental bookings (North Star) |

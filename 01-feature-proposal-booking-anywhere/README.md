@@ -7,7 +7,7 @@
 | | |
 |---|---|
 | **Task** | Pick an app, propose a new feature: problem statement, MVP scope (≤10 must-haves, 3–5 cuts), North Star + supporting metrics, and a budget-cut scenario |
-| **Full document** | [proposal.md](proposal.md)  |
+| **Full document** | [proposal.md](proposal.md) · [PDF](feature-proposal.pdf) |
 | **Continued in** | [02 · Design, prototype & FRD](../02-design-prototype-booking-anywhere/) |
 
 ---

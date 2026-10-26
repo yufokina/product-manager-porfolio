@@ -24,7 +24,7 @@ Builds on [01 · Feature proposal](../01-feature-proposal-booking-anywhere/): a 
 - **Written so engineering can start without a walkthrough:** every requirement has an ID, a priority (Must / Should / Could) and Given/When/Then acceptance criteria.
 - **Precise business rules:** what counts as a "qualifying offer" and an "eligible destination", how the destination price is calculated, the ranking formula (availability × affordability × popularity, with configurable weights), and how destination summaries and tags are computed from existing data.
 - **Covers every state:** loading, empty results, empty after filters, partial failure, timeout, and "just sold out".
-- **Traceability:** user story → requirements → acceptance criteria → metric.
+- **Traceability:** user story > requirements > acceptance criteria > metric.
 
 ## Key decisions & trade-offs
 

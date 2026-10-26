@@ -1,6 +1,6 @@
 # 01 · Booking.com "Anywhere": date-led destination discovery
 
-**Product Management Academy · Homework 1 · Feature proposal**
+**STRV Product Academy · Homework 1 · Feature proposal**
 
 > Let travellers start with **when** and **who**, and help them discover **where**, so Booking.com captures people who know their dates but have not chosen a destination.
 

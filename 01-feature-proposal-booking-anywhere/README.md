@@ -50,7 +50,7 @@ Helping these travellers move from uncertainty to a bookable destination could u
 
 | Level | Metric |
 |---|---|
-| ⭐ **North Star** | **Incremental completed bookings**: completed (not cancelled) bookings per eligible search session, test minus control |
+| **North Star** | **Incremental completed bookings**: completed (not cancelled) bookings per eligible search session, test minus control |
 | Supporting | Search-to-booking conversion of Anywhere sessions |
 | Supporting | Destination discovery engagement (% sessions opening "Explore stays" or a property) |
 | Adoption / retention | Adoption rate, WAU/MAU, sessions per planning cycle, 7-day return rate |

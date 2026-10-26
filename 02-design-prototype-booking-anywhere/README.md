@@ -15,7 +15,7 @@ Builds on [01 · Feature proposal](../01-feature-proposal-booking-anywhere/): a 
 
 ## The 3 flows
 
-| 1. Search "Anywhere" | 2. Pick a destination | 3. Explore stays → book |
+| 1. Search "Anywhere" | 2. Pick a destination | 3. Explore stays > book |
 |---|---|---|
 | ![Screen 1](2-prototype/screenshots/screen-1-home-anywhere.jpg) | ![Screen 2](2-prototype/screenshots/screen-2-destination-results.jpg) | ![Screen 3](2-prototype/screenshots/screen-3-explore-stays.jpg) |
 

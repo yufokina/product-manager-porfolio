@@ -1,6 +1,6 @@
 # Product Management Portfolio
 
-Hi, I'm **[Your name]**, a Product Manager in training at the **Product Management Academy**.
+Hi, I'm Yuliya, a Product Manager in training at the STRV Product Academy.
 This repo collects my product work: problem framing, MVP scoping, metrics, prototyping and specs.
 
 > All cases are learning exercises. Company names are used as example products; data, interviews and system details are assumptions made for the exercise.
@@ -18,5 +18,5 @@ I use AI tools for first drafts (prototypes, requirement docs) and then edit the
 
 ## Contact
 
-- LinkedIn: [add link]
-- Email: [add email]
+- LinkedIn: https://www.linkedin.com/in/yuliya-fokina-7ba82617a/
+- Email: ufokina15@gmail.com

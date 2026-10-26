@@ -8,7 +8,7 @@ Builds on [01 · Feature proposal](../01-feature-proposal-booking-anywhere/): a 
 |---|---|
 | 1. Moodboards (3) + design brief | [1-moodboard/brief.md](1-moodboard/brief.md) |
 | 2. Clickable prototype of 3 flows, built with AI | [Open the clickable prototype](https://yufokina.github.io/product-manager-porfolio/02-design-prototype-booking-anywhere/anywhere_prototype.html?utm_source=chatgpt.com) |
-| 3. Functional requirements doc (FRD) | [PDF]frd.pdf) |
+| 3. Functional requirements doc (FRD) | [Open Functional Requirements Document (PDF)](frd.pdf) |
 | AI first draft vs. my edits | In a progress |
 
 ---

@@ -3,13 +3,13 @@
 Three boards: two for the MVP (keep Booking.com's visual language, reuse its components) and one for the future vision.
 
 ### 1 · Visual language (MVP)
-[Moodboard 1: visual language](images/moodboard-1-visual-language.jpg)
+[Moodboard 1: visual language](moodboard-1-visual-language.jpg)
 
 ### 2 · Components and patterns (MVP)
-[Moodboard 2: components and patterns](images/moodboard-2-components-and-patterns.jpg)
+[Moodboard 2: components and patterns](moodboard-2-components-and-patterns.jpg)
 
 ### 3 · Future vision (not in the MVP)
-[Moodboard 3: future vision](images/moodboard-3-future-vision.jpg)
+[Moodboard 3: future vision](moodboard-3-future-vision.jpg)
 
 ## Brief
 
